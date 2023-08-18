@@ -10,6 +10,10 @@ const { data: fetchedUrls } = useFetch<Url[]>(`/url`, {
 
 const selectedUrl = ref<Url | null>(null);
 
+const initNewUrl = () => {
+    selectedUrl.value = new Url();
+}
+
 const saveUrl = async () => {
     if (!selectedUrl.value) return;
 
@@ -85,7 +89,7 @@ const urls = computed(() => {
             <input v-model="search" placeholder="Search" class="rounded-lg mr-auto" />
 
             <!-- New minification button -->
-            <button class="bg-gray-700 rounded-lg px-2 hover:bg-gray-900" @click="selectedUrl = new Url()">
+            <button class="bg-gray-700 rounded-lg px-2 hover:bg-gray-900" @click="initNewUrl()">
                 <font-awesome-icon :icon="['fas', 'add']" />
                 <span class="ml-1 hidden lg:inline">Minify a new URL</span>
             </button>
