@@ -8,7 +8,7 @@ export default defineNuxtRouteMiddleware(async to => {
     const router = useRouter();
 
     //If the route exists, we don't need to do anything, continue.
-    if (router.hasRoute(to.path)) return;
+    if (to.name && router.hasRoute(to.name)) return;
 
     const minified = to.path.split('/').at(-1);
 
