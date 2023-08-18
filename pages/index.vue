@@ -126,7 +126,7 @@ const urls = computed(() => {
     <div v-if="selectedUrl"
         class="absolute h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
         @click.self="selectedUrl = null">
-        <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3" @submit="saveUrl()">
+        <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3" @submit.prevent="saveUrl()">
             <h1 class="text-4xl font-semibold text-center">{{ selectedUrl.title }}</h1>
 
             <div>

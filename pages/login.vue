@@ -38,7 +38,7 @@ const authenticate = async () => {
 </script>
 
 <template>
-    <main class="h-full flex items-center justify-center" @submit="authenticate()">
+    <main class="h-full flex items-center justify-center" @submit.prevent="authenticate()">
         <form class="my-auto flex flex-col gap-6 justify-evenly bg-gray-700 rounded-xl px-8 py-6 lg:px-32 lg:w-1/3">
             <h1 class="text-4xl font-semibold text-center">URL minifier</h1>
 
