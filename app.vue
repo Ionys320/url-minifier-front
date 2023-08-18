@@ -5,7 +5,7 @@ const runtimeConfig = useRuntimeConfig();
 
 //Setup ofetch
 globalThis.$fetch = ofetch.create({
-  baseURL: "https://url.streamrunners.fr/api/" ?? runtimeConfig.public.apiPath as string,
+  baseURL: runtimeConfig.public.apiPath as string,
   onRequest({ options, request }) {
     const cookie = useCookie<string>('token');
     if (!cookie.value) return;
