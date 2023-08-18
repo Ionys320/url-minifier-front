@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
   css: [
     '@fortawesome/fontawesome-svg-core/styles.css'
   ],
@@ -16,4 +15,11 @@ export default defineNuxtConfig({
       apiPath: '', // Must be overridden by NUXT_PUBLIC_API_PATH environment variable
     }
   },
+  build: {
+    transpile: [
+        '@fortawesome/fontawesome-svg-core',
+        '@fortawesome/vue-fontawesome',
+        '@fortawesome/free-solid-svg-icons',
+    ]
+}
 })
