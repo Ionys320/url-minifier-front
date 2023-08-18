@@ -5,15 +5,17 @@ export default defineNuxtRouteMiddleware(async to => {
     const onError = () => abortNavigation("This URL was not found.");
 
     const config = useRuntimeConfig();
+    const router = useRouter();
 
-    if (to.path.startsWith("/l/")) {
-        const minified = to.path.split('/').at(-1);
+    //If the route exists, we don't need to do anything, continue.
+    if (router.hasRoute(to.path)) return;
 
-        const { error, data } = await useFetch<string>(`${config.public.apiPath}/url/${minified}/visit`);
+    const minified = to.path.split('/').at(-1);
 
-        if (error.value || !data.value)
-            return onError();
+    const { error, data } = await useFetch<string>(`${config.public.apiPath}/url/${minified}/visit`);
 
-        return navigateTo(data.value, { replace: true, external: true });
-    }
+    if (error.value || !data.value)
+        return onError();
+
+    return navigateTo(data.value, { replace: true, external: true });
 })

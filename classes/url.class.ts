@@ -44,7 +44,7 @@ export class Url implements UrlInterface {
     }
 
     get fullMinified(): string {
-        return `${location.origin}/l/${this.minified}`;
+        return `${location.origin}/${this.minified}`;
     }
 
     get tags(): string {
