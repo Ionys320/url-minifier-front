@@ -3,6 +3,7 @@ import { Url } from '../classes/url.class';
 import { UrlInterface } from '../interfaces/url.interface';
 
 const { data: fetchedUrls } = useFetch<Url[]>(`/url`, {
+    server: false,
     transform: (data: UrlInterface[]) => {
         return Url.fromJSONs(data);
     }

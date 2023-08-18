@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { UserInterface } from 'interfaces/user.interface';
 
-const { data: users } = useFetch<UserInterface[]>(`/user`);
+const { data: users } = useFetch<UserInterface[]>(`/user`, {
+    server: false,
+});
 
 const selectedUser = ref<UserInterface | null>(null);
 
@@ -67,7 +69,8 @@ const saveUser = async () => {
     <div v-if="selectedUser"
         class="absolute h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
         @click.self="selectedUser = null">
-        <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3" @submit.prevent="saveUser()">
+        <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3"
+            @submit.prevent="saveUser()">
             <h1 class="text-4xl font-semibold text-center" v-text="selectedUser.id < 0 ? `Add a user` : `Edit a user`"></h1>
 
             <div>
