@@ -107,7 +107,7 @@ const urls = computed(() => {
                         <span class="font-bold">{{ url.title }}</span> -
 
                         <!-- Original URL/Open icon -->
-                        <a target="_blank" :href="url.base" class="hover:text-gray-300">
+                        <a target="_blank" :href="url.base" class="hover:text-gray-300" @click.stop>
                             {{ url.base }}
 
                             <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
