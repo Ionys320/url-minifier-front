@@ -30,8 +30,8 @@ const saveUrl = async () => {
 
         if (error.value || !data.value) return alert('An error occured.');
 
-        copy(selectedUrl.value.fullMinified)
-        alert(`Url minified. The URL is ${selectedUrl.value.fullMinified} and has been copy to your clipboard.`);
+        await copy(data.value.fullMinified)
+        alert(`Url minified. The URL is ${data.value.fullMinified} and has been copy to your clipboard.`);
 
         urls.value?.push(data.value!);
     } else {
@@ -81,7 +81,7 @@ const urls = computed(() => {
 </script>
 
 <template>
-    <div>
+    <div class="flex flex-col gap-6">
         <!-- Action bar -->
         <div class="flex gap-4">
             <h2>URLs</h2>
@@ -97,10 +97,11 @@ const urls = computed(() => {
         </div>
 
         <!-- List -->
-        <div class="h-full overflow-auto bg-gray-700 rounded-lg mt-6 divide-y-2 divide-gray-800">
+        <div class="h-full overflow-auto bg-gray-700 rounded-lg divide-y-2 divide-gray-800">
             <div v-for="url in urls"
-                class="p-4 flex items-center justify-between gap-2 hover:bg-opacity-20 hover:bg-black cursor-pointer"
+                class="w-full p-4 flex items-center justify-between gap-3 hover:bg-opacity-20 hover:bg-black cursor-pointer"
                 @click="selectedUrl = url">
+                <!-- Link data -->
                 <div>
                     <p>
                         <span class="font-bold">{{ url.title }}</span> -
@@ -119,7 +120,8 @@ const urls = computed(() => {
                     </p>
                 </div>
 
-                <button class="bg-gray-800 rounded-lg px-2 py-1 hover:bg-gray-900"
+                <!-- Copy button -->
+                <button class="bg-gray-800 rounded-lg px-2 py-1 hover:bg-gray-900 shrink-0"
                     @click.stop="copy(url.fullMinified, true)">
                     <font-awesome-icon :icon="['fas', 'copy']" />
                     <span class="ml-2 hidden lg:inline">Copy the minified URL</span>
@@ -138,7 +140,7 @@ const urls = computed(() => {
 
             <div>
                 <label for="title">Internal title</label>
-                <input id="title" v-model="selectedUrl.title" class="w-full" />
+                <input id="title" placeholder="New minified URL" v-model="selectedUrl.title" class="w-full" />
             </div>
 
             <div>
