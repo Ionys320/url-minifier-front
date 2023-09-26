@@ -1,11 +1,11 @@
 export const copy = (text: string, showConfirmation?: boolean) => {
-    navigator.clipboard.writeText(text).then(
-        () => {
-            if (showConfirmation)
-                alert('Content copied to clipboard');
-        },
-        () => {
-            alert('Failed to copy content to clipboard')
-        },
-    );
+    return new Promise<void>(resolve => {
+        navigator.clipboard.writeText(text)
+            .then(_ => {
+                if (showConfirmation)
+                    alert('Copied to clipboard');
+            })
+            .catch(_ => alert('Failed to copy to clipboard'))
+            .finally(() => resolve());
+    });
 }
