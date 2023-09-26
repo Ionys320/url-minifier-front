@@ -8,7 +8,7 @@ export class Url implements UrlInterface {
     _tags?: string;
     visits: number;
 
-    constructor(id: number = -1, minified: string = '', base: string = '', title: string = 'New minified URL', tags?: string, visits?: number) {
+    constructor(id: number = -1, minified: string = '', base: string = '', title: string = '', tags?: string, visits?: number) {
         this.id = id;
         this.minified = minified;
         this.base = base;
