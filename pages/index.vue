@@ -72,7 +72,7 @@ const urls = computed(() => {
 
     const lowerCasedSearch = search.value.toLowerCase();
 
-    fetchedUrls.value?.filter(url => {
+    return fetchedUrls.value?.filter(url => {
         return url.title?.toLowerCase().includes(lowerCasedSearch)
             || url.base.toLowerCase().includes(lowerCasedSearch)
             || url.tags?.split('|').find(tag => tag.toLowerCase().includes(lowerCasedSearch));
