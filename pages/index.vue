@@ -68,15 +68,16 @@ const deleteUrl = async () => {
 
 const search = ref('');
 const urls = computed(() => {
-    if (!search.value) return fetchedUrls.value;
+    if (!search.value) return fetchedUrls.value?.sort((a, b) => b.id - a.id);
 
     const lowerCasedSearch = search.value.toLowerCase();
 
-    return fetchedUrls.value?.filter(url => {
+    fetchedUrls.value?.filter(url => {
         return url.title?.toLowerCase().includes(lowerCasedSearch)
             || url.base.toLowerCase().includes(lowerCasedSearch)
             || url.tags?.split('|').find(tag => tag.toLowerCase().includes(lowerCasedSearch));
-    });
+    })
+        .sort((a, b) => b.id - a.id);
 });
 </script>
 
