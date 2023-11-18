@@ -7,7 +7,7 @@
         </nav>
 
         <!-- Page content -->
-        <main class="grow">
+        <main class="grow overflow-hidden">
             <slot></slot>
         </main>
     </div>

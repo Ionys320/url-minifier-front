@@ -82,7 +82,7 @@ const urls = computed(() => {
 </script>
 
 <template>
-    <div class="flex flex-col gap-6">
+    <div class="flex flex-col gap-6 h-full">
         <!-- Action bar -->
         <div class="flex gap-4">
             <h2>URLs</h2>
@@ -98,7 +98,7 @@ const urls = computed(() => {
         </div>
 
         <!-- List -->
-        <div class="h-full overflow-auto bg-gray-700 rounded-lg divide-y-2 divide-gray-800">
+        <div class="overflow-auto bg-gray-700 rounded-lg divide-y-2 divide-gray-800 h-full">
             <div v-for="url in urls"
                 class="w-full p-4 flex items-center justify-between gap-3 hover:bg-opacity-20 hover:bg-black cursor-pointer"
                 @click="selectedUrl = url">
@@ -133,7 +133,7 @@ const urls = computed(() => {
 
     <!-- Minify/edit a url modal -->
     <div v-if="selectedUrl"
-        class="absolute h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
+        class="fixed h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
         @click.self="selectedUrl = null">
         <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3"
             @submit.prevent="saveUrl()">
