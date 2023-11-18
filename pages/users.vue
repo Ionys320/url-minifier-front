@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { UserInterface } from 'interfaces/user.interface';
+import type { UserInterface } from '~/interfaces/user.interface';
 
 const { data: users } = useFetch<UserInterface[]>(`/user`, {
     server: false,

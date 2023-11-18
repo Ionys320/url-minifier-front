@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { UserInterface } from 'interfaces/user.interface';
-import { AuthResponse } from 'interfaces/api_responses/auth.response';
+import type { UserInterface } from '~/interfaces/user.interface';
+import type { AuthResponse } from '~/interfaces/api_responses/auth.response';
 
 definePageMeta({
     layout: false

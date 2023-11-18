@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { Url } from '../classes/url.class';
-import { UrlInterface } from '../interfaces/url.interface';
+import { Url } from '~/classes/url.class';
+import type { UrlInterface } from '~/interfaces/url.interface';
 
 const { data: fetchedUrls } = useFetch<Url[]>(`/url`, {
     server: false,
