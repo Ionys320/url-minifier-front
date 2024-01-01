@@ -117,7 +117,7 @@ const urls = computed(() => {
 
                     <!-- More infos -->
                     <p class="text-gray-200">
-                        {{ url.visits }} visits - Tags: {{ url.tags }}
+                       Code: {{ url.minified }} - {{ url.visits }} visits - Tags: {{ url.tags }}
                     </p>
                 </div>
 
@@ -137,7 +137,7 @@ const urls = computed(() => {
         @click.self="selectedUrl = null">
         <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3"
             @submit.prevent="saveUrl()">
-            <h1 class="text-4xl font-semibold text-center">{{ selectedUrl.title }}</h1>
+            <h1 class="text-4xl font-semibold text-center truncate">{{ selectedUrl.title }}</h1>
 
             <div>
                 <label for="title">Internal title</label>
@@ -156,9 +156,10 @@ const urls = computed(() => {
 
             <div class="grid lg:grid-cols-3 gap-4">
                 <button :disabled="selectedUrl.id < 0" class="bg-red-900 hover:bg-red-800 disabled:bg-opacity-60"
-                    @click="deleteUrl()">
+                    @click="deleteUrl()" type="button">
                     Delete
                 </button>
+
                 <button class="bg-blue-600 hover:bg-blue-500 lg:col-span-2" type="submit">
                     Save and close
                 </button>
