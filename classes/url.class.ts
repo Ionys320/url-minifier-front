@@ -1,11 +1,11 @@
-import { UrlInterface } from "../interfaces/url.interface";
+import type { UrlInterface } from "../interfaces/url.interface";
 
 export class Url implements UrlInterface {
     id: number;
     minified: string;
     base: string;
     title?: string;
-    _tags?: string;
+    private _tags?: string;
     visits: number;
 
     constructor(id: number = -1, minified: string = '', base: string = '', title: string = '', tags?: string, visits?: number) {
