@@ -141,16 +141,21 @@ const urls = computed(() => {
 
             <div>
                 <label for="title">Internal title</label>
-                <input id="title" placeholder="New minified URL" v-model="selectedUrl.title" class="w-full" />
+                <input id="title" placeholder="New minified URL" v-model="selectedUrl.title" required class="w-full" />
             </div>
 
             <div>
-                <label for="minify">URL to minify</label>
-                <input id="minify" type="url" v-model="selectedUrl.base" class="w-full" />
+                <label for="base">URL to minify</label>
+                <input id="base" type="url" v-model="selectedUrl.base" required class="w-full" />
             </div>
 
             <div>
-                <label for="tags">Tags</label>
+                <label for="minified">Minified code (optionnal)</label>
+                <input id="minified" type="url" v-model="selectedUrl.minified" class="w-full" />
+            </div>
+
+            <div>
+                <label for="tags">Tags (optionnal)</label>
                 <input id="tags" v-model="selectedUrl.tags" placeholder="Separated with a comma (,)" class="w-full" />
             </div>
 
