@@ -151,7 +151,7 @@ const urls = computed(() => {
 
             <div>
                 <label for="minified">Minified code (optionnal)</label>
-                <input id="minified" type="url" v-model="selectedUrl.minified" class="w-full" />
+                <input id="minified" v-model="selectedUrl.minified" class="w-full" />
             </div>
 
             <div>
