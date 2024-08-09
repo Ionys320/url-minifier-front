@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "url-minifier-front",
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -10,12 +10,12 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "@types/node": "^18.17.3",
-    "nuxt": "^3.9.0"
+    "@nuxtjs/tailwindcss": "^6.12.1",
+    "@types/node": "^22.2.0",
+    "nuxt": "^3.12.4"
   },
   "dependencies": {
-    "@fortawesome/free-solid-svg-icons": "^6.4.2",
-    "@fortawesome/vue-fontawesome": "^3.0.3"
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/vue-fontawesome": "^3.0.8"
   }
 }

@@ -3,7 +3,6 @@ import { Url } from '~/classes/url.class';
 import type { UrlInterface } from '~/interfaces/url.interface';
 
 const { data: fetchedUrls } = useFetch<Url[]>(`/url`, {
-    server: false,
     transform: (data: UrlInterface[]) => {
         return Url.fromJSONs(data);
     }
@@ -75,6 +74,7 @@ const urls = computed(() => {
     return fetchedUrls.value?.filter(url => {
         return url.title?.toLowerCase().includes(lowerCasedSearch)
             || url.base.toLowerCase().includes(lowerCasedSearch)
+            || url.minified?.toLowerCase().includes(lowerCasedSearch)
             || url.tags?.split('|').find(tag => tag.toLowerCase().includes(lowerCasedSearch));
     })
         .sort((a, b) => b.id - a.id);
@@ -91,14 +91,14 @@ const urls = computed(() => {
             <input v-model="search" placeholder="Search" class="rounded-lg mr-auto" />
 
             <!-- New minification button -->
-            <button class="bg-gray-700 rounded-lg px-2 hover:bg-gray-900" @click="initNewUrl()">
+            <button class="bg-gray-700 rounded-lg px-2 hover:bg-gray-900" @click="initNewUrl">
                 <font-awesome-icon :icon="['fas', 'add']" />
-                <span class="ml-1 hidden lg:inline">Minify a new URL</span>
+                <span class="ml-1 max-lg:hidden">Minify a new URL</span>
             </button>
         </div>
 
         <!-- List -->
-        <div class="overflow-auto bg-gray-700 rounded-lg divide-y-2 divide-gray-800 h-full">
+        <div class="overflow-x-hidden overflow-y-auto bg-gray-700 rounded-lg divide-y-2 divide-gray-800 h-full">
             <div v-for="url in urls"
                 class="w-full p-4 flex items-center justify-between gap-3 hover:bg-opacity-20 hover:bg-black cursor-pointer"
                 @click="selectedUrl = url">
@@ -108,7 +108,7 @@ const urls = computed(() => {
                         <span class="font-bold">{{ url.title }}</span> -
 
                         <!-- Original URL/Open icon -->
-                        <a target="_blank" :href="url.base" class="hover:text-gray-300" @click.stop>
+                        <a target="_blank" :href="url.base" class="hover:text-gray-300 truncate" @click.stop>
                             {{ url.base }}
 
                             <font-awesome-icon :icon="['fas', 'up-right-from-square']" />
@@ -125,7 +125,7 @@ const urls = computed(() => {
                 <button class="bg-gray-800 rounded-lg px-2 py-1 hover:bg-gray-900 shrink-0"
                     @click.stop="copy(url.fullMinified, true)">
                     <font-awesome-icon :icon="['fas', 'copy']" />
-                    <span class="ml-2 hidden lg:inline">Copy the minified URL</span>
+                    <span class="ml-2 max-lg:hidden">Copy the minified URL</span>
                 </button>
             </div>
         </div>
@@ -136,7 +136,7 @@ const urls = computed(() => {
         class="fixed h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
         @click.self="selectedUrl = null">
         <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3"
-            @submit.prevent="saveUrl()">
+            @submit.prevent="saveUrl">
             <h1 class="text-4xl font-semibold text-center truncate">{{ selectedUrl.title }}</h1>
 
             <div>
@@ -150,18 +150,18 @@ const urls = computed(() => {
             </div>
 
             <div>
-                <label for="minified">Minified code (optionnal)</label>
+                <label for="minified">Minified code (optional)</label>
                 <input id="minified" v-model="selectedUrl.minified" class="w-full" />
             </div>
 
             <div>
-                <label for="tags">Tags (optionnal)</label>
+                <label for="tags">Tags (optional)</label>
                 <input id="tags" v-model="selectedUrl.tags" placeholder="Separated with a comma (,)" class="w-full" />
             </div>
 
             <div class="grid lg:grid-cols-3 gap-4">
                 <button :disabled="selectedUrl.id < 0" class="bg-red-900 hover:bg-red-800 disabled:bg-opacity-60"
-                    @click="deleteUrl()" type="button">
+                    @click="deleteUrl" type="button">
                     Delete
                 </button>
 

@@ -38,21 +38,23 @@ const authenticate = async () => {
 </script>
 
 <template>
-    <main class="h-full flex items-center justify-center" @submit.prevent="authenticate()">
-        <form class="my-auto flex flex-col gap-6 justify-evenly bg-gray-700 rounded-xl px-8 py-6 lg:px-32 lg:w-1/3">
+    <main class="h-full flex items-center justify-center" @submit.prevent="authenticate">
+        <div class="flex flex-col items-center gap-5 w-full">
             <h1 class="text-4xl font-semibold text-center">URL minifier</h1>
+            
+            <form class="my-auto flex flex-col gap-3 justify-evenly bg-gray-700 rounded-xl px-8 py-6">
+                <div class="relative flex items-center">
+                    <input id="email" type="email" v-model="email" aria-label="Email address" placeholder="Email address" class="w-full pl-8" />
+                    <font-awesome-icon class="absolute left-2" :icon="['fas', 'envelope']" />
+                </div>
 
-            <div>
-                <label for="email">Email address</label>
-                <input id="email" type="email" v-model="email" placeholder="benoit@streamrunners.fr" class="w-full" />
-            </div>
+                <div class="relative flex items-center">
+                    <input id="password" type="password" autocomplete="current-password" v-model="password" aria-label="Password" placeholder="Password" class="w-full pl-8" />
+                    <font-awesome-icon class="absolute left-2" :icon="['fas', 'key']" />
+                </div>
 
-            <div>
-                <label for="password">Password</label>
-                <input id="password" type="password" v-model="password" placeholder="Bipbop123!" class="w-full" />
-            </div>
-
-            <button class="bg-blue-700 hover:bg-blue-600 w-full" type="submit">Login</button>
-        </form>
+                <button class="bg-blue-400 hover:bg-blue-500 w-full mt-2" type="submit">Login</button>
+            </form>
+        </div>
     </main>
 </template>

@@ -1,9 +1,7 @@
 <script lang="ts" setup>
 import type { UserInterface } from '~/interfaces/user.interface';
 
-const { data: users } = useFetch<UserInterface[]>(`/user`, {
-    server: false,
-});
+const { data: users } = useFetch<UserInterface[]>(`/user`);
 
 const selectedUser = ref<UserInterface | null>(null);
 
@@ -34,6 +32,19 @@ const saveUser = async () => {
 
     selectedUser.value = null;
 }
+
+const deleteUser = async (id: number) => {
+    const result = prompt('Are you sure you want to delete this user?\nTo confirm, please type DELETE.');
+    if (!result || result !== 'DELETE') return alert('Deletion cancelled.');
+
+    const { error } = await useFetch(`/user/${id}`, {
+        method: 'DELETE',
+    });
+
+    if (error.value) return alert('An error occured.');
+
+    users.value = users.value!.filter(user => user.id !== id);
+}
 </script>
 
 <template>
@@ -59,9 +70,9 @@ const saveUser = async () => {
                     <p v-if="user.isAdmin" class="text-gray-200">Admin</p>
                 </div>
 
-                <div class="hover:text-red-500">
+                <button class="hover:text-red-500" @click.stop="deleteUser(user.id)">
                     <font-awesome-icon :icon="['fas', 'trash']" />
-                </div>
+                </button>
             </div>
         </div>
     </div>
@@ -70,7 +81,7 @@ const saveUser = async () => {
         class="absolute h-screen w-screen bg-black bg-opacity-60 top-0 left-0 flex items-center justify-center"
         @click.self="selectedUser = null">
         <form class="flex flex-col gap-4 py-4 justify-evenly bg-gray-800 rounded-xl p-8 lg:w-1/3"
-            @submit.prevent="saveUser()">
+            @submit.prevent="saveUser">
             <h1 class="text-4xl font-semibold text-center" v-text="selectedUser.id < 0 ? `Add a user` : `Edit a user`"></h1>
 
             <div>
